@@ -20,12 +20,16 @@ export class SignupComponent implements OnInit {
     phone: '',
   };
 
+  //regex for validations
+  public alphabets = /^[A-Za-z]+$/;
+  public phoneNumber = /^\d{10}$/;
+
+
   ngOnInit(): void {}
 
   formSubmit() {
-    console.log(this.user);
+
     if (this.user.username == '' || this.user.username == null) {
-      // alert('User is required !!');
       this.snack.open('Username is required !! ', '', {
         duration: 3000,
       });
@@ -33,33 +37,61 @@ export class SignupComponent implements OnInit {
     }
 
     if (this.user.password == '' || this.user.password == null) {
-      // alert('User is required !!');
       this.snack.open('Password is required !! ', '', {
         duration: 3000,
       });
       return;
     }
 
-    //validate
+     if(this.user.firstName=='' || this.user.firstName == null || !(this.user.firstName.match(this.alphabets)) ){
+      this.snack.open('Invalid First Name!! ', '', {
+        duration: 3000,
+      });
+      return;
+    }
 
-    //addUser: userservice
-    this.userService.addUser(this.user).subscribe(
-      (data: any) => {
-        //success
-        console.log(data);
-        //alert('success');
-        Swal.fire('Successfully done !!', 'User id is ' + data.id, 'success');
-      },
-      (error) => {
-        //error
-        console.log(error);
-        // alert('something went wrong');
-        this.snack.open(error.error.text, '', {
-          duration: 3000,
-        });
-      }
-    );
+     if(this.user.lastName=='' || this.user.lastName == null || !(this.user.lastName.match(this.alphabets)) ){
+      this.snack.open('Invalid Last Name!! ', '', {
+        duration: 3000,
+      });
+      return;
+    }
+     if(!this.user.phone.match(this.phoneNumber)){
+      this.snack.open('Invalid Phone Number!! ', '', {
+        duration: 3000,
+      });
+      return;
+    }
+      //saving user
+          this.userService.addUser(this.user).subscribe(
+            (data: any) => {
+              //success
+              console.log(data);
+              //alert('success');
+              Swal.fire('Successfully done !!', 'User id is ' + data.id, 'success');
+            },
+            (error) => {
+              //error
+              console.log(error);
+              // alert('something went wrong');
+              this.snack.open(error.error.text, '', {
+                duration: 3000,
+              });
+            }
+          );
+    
   }
 
-  //this.user
+  validateUser(User:any){
+
+  }
+  onClear() {
+    this.user.username = '';
+    this.user.password = '';
+    this.user.firstName = '';
+    this.user.lastName = '';
+    this.user.email = '';
+    this.user.phone = '';
+  }
+
 }
