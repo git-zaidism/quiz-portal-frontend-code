@@ -7,21 +7,21 @@
             <img src="../../../assets/logo.png" alt="" />
           </div>
 
-          <h1 class="text-center">Register Here !!</h1>
+          <h1 class="text-center">Student Registration</h1>
 
           <!-- {{ user | json }} -->
 
           <form (ngSubmit)="formSubmit()">
             <!-- Username field -->
             <mat-form-field class="full-width" appearance="outline">
-              <mat-label>User Name</mat-label>
+              <mat-label>Username</mat-label>
               <input required [(ngModel)]="user.username" name="username" matInput placeholder="Enter here" />
               <mat-hint>Username must be unique !!</mat-hint>
             </mat-form-field>
 
             <!-- Password field -->
             <mat-form-field class="full-width" appearance="outline">
-              <mat-label>User Password</mat-label>
+              <mat-label>Password</mat-label>
               <input required [(ngModel)]="user.password" name="password" type="password" matInput
                 placeholder="Enter here" />
             </mat-form-field>
@@ -40,13 +40,13 @@
 
             <!-- email -->
             <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Email Address</mat-label>
+              <mat-label>Email</mat-label>
               <input required [(ngModel)]="user.email" name="email" type="email" matInput placeholder="Enter here" />
             </mat-form-field>
 
             <!-- phone number -->
             <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Phone Number</mat-label>
+              <mat-label>Phone</mat-label>
               <input required [(ngModel)]="user.phone" maxlength="10" name="phone" type="text" matInput placeholder="Enter here" />
             </mat-form-field>
 
@@ -54,11 +54,16 @@
               <button type="submit" mat-raised-button color="primary">
                 Register
               </button>
-              <button type="button" style="margin-left: 20px" (click)="onClear()" mat-raised-button color="accent">
+
+              <button type="button"  (click)="onClear()" mat-raised-button color="accent">
                 Clear
               </button>
             </div>
+
           </form>
+          
+          
+
         </mat-card>
       </div>
     </div>
