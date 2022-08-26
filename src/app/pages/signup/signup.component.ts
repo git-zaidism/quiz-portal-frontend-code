@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  constructor(private userService: UserService, private snack: MatSnackBar) {}
+  constructor(private userService: UserService, private snack: MatSnackBar) { }
 
   public user = {
     username: '',
@@ -25,66 +25,66 @@ export class SignupComponent implements OnInit {
   public phoneNumber = /^\d{10}$/;
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   formSubmit() {
+    let validationError = false;
 
     if (this.user.username == '' || this.user.username == null) {
-      this.snack.open('Username is required !! ', '', {
+      validationError = true;
+      this.snack.open('Username is Mandatory!', '', {
         duration: 3000,
       });
       return;
     }
 
     if (this.user.password == '' || this.user.password == null) {
-      this.snack.open('Password is required !! ', '', {
+      validationError = true;
+      this.snack.open('Password is Mandatory!', '', {
         duration: 3000,
       });
       return;
     }
 
-     if(this.user.firstName=='' || this.user.firstName == null || !(this.user.firstName.match(this.alphabets)) ){
-      this.snack.open('Invalid First Name!! ', '', {
+    if (this.user.firstName == '' || this.user.firstName == null || !(this.user.firstName.match(this.alphabets))) {
+      validationError = true;
+      this.snack.open('Invalid First Name', '', {
         duration: 3000,
       });
       return;
     }
 
-     if(this.user.lastName=='' || this.user.lastName == null || !(this.user.lastName.match(this.alphabets)) ){
-      this.snack.open('Invalid Last Name!! ', '', {
+    if (this.user.lastName == '' || this.user.lastName == null || !(this.user.lastName.match(this.alphabets))) {
+      validationError = true;
+      this.snack.open('Invalid Last Name!', '', {
         duration: 3000,
       });
       return;
     }
-     if(!this.user.phone.match(this.phoneNumber)){
+    if (!this.user.phone.match(this.phoneNumber)) {
+      validationError = true;
       this.snack.open('Invalid Phone Number!! ', '', {
         duration: 3000,
       });
       return;
     }
-      //saving user
-          this.userService.addUser(this.user).subscribe(
-            (data: any) => {
-              //success
-              console.log(data);
-              //alert('success');
-              Swal.fire('Successfully done !!', 'User id is ' + data.id, 'success');
-            },
-            (error) => {
-              //error
-              console.log(error);
-              // alert('something went wrong');
-              this.snack.open(error.error.text, '', {
-                duration: 3000,
-              });
-            }
-          );
-    
+
+    if(!validationError) {
+      this.userService.addUser(this.user).subscribe( // saving user
+        (data: any) => {
+          console.log(data);
+          Swal.fire('User is successfully registered.', 'Your Username is ' + data.username, 'success');
+        },
+        (error) => {
+          console.log(error);
+          this.snack.open(error.error.text, '', {
+            duration: 3000,
+          });
+        }
+      );
+    }
   }
 
-  validateUser(User:any){
-
-  }
   onClear() {
     this.user.username = '';
     this.user.password = '';

@@ -1,3 +1,11 @@
 .full-width {
   width: 100%;
 }
+
+.btn-space {
+  margin-left: 30px;
+}
+
+.reg-header{
+  font-weight: bold;
+}
