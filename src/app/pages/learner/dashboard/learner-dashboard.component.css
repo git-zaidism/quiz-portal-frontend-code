@@ -1,0 +1,45 @@
+.page {
+  display: grid;
+  gap: 1rem;
+}
+
+.hero,
+.status-card {
+  padding: 1.4rem;
+}
+
+.hero h1 {
+  margin: 0.9rem 0 0.35rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.quiz-card {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.4rem;
+}
+
+.quiz-card h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.meta-row {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 860px) {
+  .quiz-grid {
+    grid-template-columns: 1fr;
+  }
+}

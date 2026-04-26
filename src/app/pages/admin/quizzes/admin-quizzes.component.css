@@ -1,0 +1,58 @@
+.page {
+  display: grid;
+  gap: 1rem;
+  padding: 1.4rem;
+}
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.page-head h1 {
+  margin: 0.9rem 0 0.35rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.filters {
+  align-items: end;
+}
+
+.quiz-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.quiz-head {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.quiz-copy p {
+  margin: 0.45rem 0;
+}
+
+.meta-row {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 900px) {
+  .page-head,
+  .quiz-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,14 +1,24 @@
-<ngx-ui-loader
-  fgsColor="#ff4081"
-  pbColor="#ff4081"
-  text="Please wait.."
-  pbThickness="6"
-  textColor="#ff4081"
-></ngx-ui-loader>
+<div class="app-frame">
+  <router-outlet />
+</div>
 
-<div ngxUiLoaderBlurred blur="6">
-  <app-navbar></app-navbar>
+<app-confirmation-dialog />
 
-  <!-- dynamic content -->
-  <router-outlet></router-outlet>
+<div class="toast-stack">
+  @for (item of notifications.items(); track item.id) {
+    <article
+      class="toast"
+      [class.success]="item.tone === 'success'"
+      [class.error]="item.tone === 'error'"
+      [class.info]="item.tone === 'info'"
+    >
+      <div>
+        <strong>{{ item.title }}</strong>
+        <p>{{ item.message }}</p>
+      </div>
+      <button type="button" (click)="notifications.remove(item.id)" aria-label="Dismiss">
+        ×
+      </button>
+    </article>
+  }
 </div>

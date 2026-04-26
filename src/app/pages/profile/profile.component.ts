@@ -1,24 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AuthSessionService } from '../../core/services/auth-session.service';
 
 @Component({
   selector: 'app-profile',
+  standalone: true,
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrl: './profile.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent implements OnInit {
-  user = null;
-  constructor(private login: LoginService) {}
-
-  ngOnInit(): void {
-    this.user = this.login.getUser();
-    // this.login.getCurrentUser().subscribe(
-    //   (user: any) => {
-    //     this.user = user;
-    //   },
-    //   (error) => {
-    //     alert('error');
-    //   }
-    // );
-  }
+export class ProfileComponent {
+  readonly authSession = inject(AuthSessionService);
 }

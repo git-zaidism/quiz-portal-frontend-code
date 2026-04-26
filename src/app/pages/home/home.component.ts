@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AuthSessionService } from '../../core/services/auth-session.service';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [RouterLink],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrl: './home.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  private readonly authSession = inject(AuthSessionService);
 
-  constructor() { }
+  readonly primaryRoute = computed(() =>
+    this.authSession.isLoggedIn()
+      ? this.authSession.ensureRoleRedirect()
+      : '/login',
+  );
 
-  ngOnInit(): void {
-  }
-
+  readonly primaryLabel = computed(() =>
+    this.authSession.isLoggedIn() ? 'Open workspace' : 'Sign in',
+  );
 }

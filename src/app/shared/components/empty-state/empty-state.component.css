@@ -1,0 +1,24 @@
+.empty {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.empty h3 {
+  margin: 0 0 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.empty p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.empty-orb {
+  position: absolute;
+  inset: auto -3rem -3rem auto;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 68%);
+}

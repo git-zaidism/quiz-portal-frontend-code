@@ -1,0 +1,24 @@
+@if (confirmation.current(); as dialog) {
+  <div class="confirm-backdrop" (click)="cancel()">
+    <section class="confirm-card panel" (click)="$event.stopPropagation()">
+      <span class="eyebrow">{{ dialog.tone === 'danger' ? 'Confirm deletion' : 'Confirmation' }}</span>
+      <h2>{{ dialog.title }}</h2>
+      <p>{{ dialog.message }}</p>
+
+      <div class="confirm-actions">
+        <button class="btn btn-secondary" type="button" (click)="cancel()">
+          {{ dialog.cancelLabel }}
+        </button>
+        <button
+          class="btn"
+          type="button"
+          [class.btn-danger]="dialog.tone === 'danger'"
+          [class.btn-primary]="dialog.tone !== 'danger'"
+          (click)="confirm()"
+        >
+          {{ dialog.confirmLabel }}
+        </button>
+      </div>
+    </section>
+  </div>
+}

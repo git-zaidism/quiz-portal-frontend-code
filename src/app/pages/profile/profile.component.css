@@ -1,16 +1,64 @@
-.profile-image {
-  max-width: 150px;
-  max-height: 150px;
-  border: 2px solid #ff4081;
-  border-radius: 50%;
+.profile {
+  padding: 1.5rem 0;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
+.profile-card {
+  padding: 1.5rem;
 }
 
-.table tr td {
-  padding: 15px 10px;
-  border: 0.5px solid #e2e2e2;
+.profile-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-head h1 {
+  margin: 0.75rem 0 0.35rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.avatar {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 1.2rem;
+  display: grid;
+  place-items: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(37, 99, 235, 0.3));
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.profile-grid article {
+  padding: 1.25rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.profile-grid h2 {
+  margin: 0 0 0.9rem;
+  font-size: 1.1rem;
+}
+
+.chip-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 780px) {
+  .profile-head,
+  .profile-grid {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

@@ -1,0 +1,52 @@
+@if (quiz(); as quiz) {
+  <main class="panel instructions">
+    <span class="eyebrow">Before you start</span>
+    <h1>{{ quiz.title }}</h1>
+    <p class="text-muted">{{ quiz.description || 'Read the rules carefully before beginning.' }}</p>
+
+    <div class="stat-grid">
+      <article class="stat-card">
+        <span class="text-muted">Category</span>
+        <strong>{{ quiz.categoryTitle }}</strong>
+      </article>
+      <article class="stat-card">
+        <span class="text-muted">Questions</span>
+        <strong>{{ quiz.numberOfQuestions }}</strong>
+      </article>
+      <article class="stat-card">
+        <span class="text-muted">Marks</span>
+        <strong>{{ quiz.maxMarks }}</strong>
+      </article>
+      <article class="stat-card">
+        <span class="text-muted">Estimated time</span>
+        <strong>{{ estimatedMinutes() }} min</strong>
+      </article>
+    </div>
+
+    <section class="rules">
+      <article class="rule panel">
+        <strong>Rule 1</strong>
+        <p class="text-muted">Each question carries equal weight based on the backend evaluation rules.</p>
+      </article>
+      <article class="rule panel">
+        <strong>Rule 2</strong>
+        <p class="text-muted">The timer is set to two minutes per question and auto-submits when it reaches zero.</p>
+      </article>
+      <article class="rule panel">
+        <strong>Rule 3</strong>
+        <p class="text-muted">Only active quizzes appear here, and scoring is validated server-side on submission.</p>
+      </article>
+    </section>
+
+    <div class="button-row">
+      <a class="btn btn-primary" [routerLink]="['/start', quiz.quizId]">Start quiz</a>
+      <a class="btn btn-secondary" routerLink="/user-dashboard">Back to dashboard</a>
+    </div>
+  </main>
+}
+
+@if (errorMessage()) {
+  <section class="panel instructions">
+    <p>{{ errorMessage() }}</p>
+  </section>
+}

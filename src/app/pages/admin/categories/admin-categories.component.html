@@ -1,0 +1,59 @@
+<main class="layout">
+  <section class="panel form-card">
+    <span class="eyebrow">{{ editing() ? 'Edit category' : 'Create category' }}</span>
+    <h1>{{ editing() ? 'Update a category' : 'Add a new category' }}</h1>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="field-grid">
+      <div class="field">
+        <label for="title">Title</label>
+        <input id="title" formControlName="title" placeholder="Java, SQL, Spring Boot..." />
+      </div>
+      <div class="field">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description"></textarea>
+      </div>
+
+      @if (errorMessage()) {
+        <p class="empty-copy">{{ errorMessage() }}</p>
+      }
+
+      <div class="button-row">
+        <button class="btn btn-primary" type="submit" [disabled]="saving()">
+          {{ saving() ? 'Saving...' : editing() ? 'Update category' : 'Create category' }}
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="resetForm()">Reset</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel list-card">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Library</span>
+        <h2>Existing categories</h2>
+      </div>
+      <span class="chip">{{ categories().length }} total</span>
+    </div>
+
+    @if (categories().length) {
+      <div class="list-stack">
+        @for (category of categories(); track category.categoryId) {
+          <article class="category-row">
+            <div>
+              <strong>{{ category.title }}</strong>
+              <p class="text-muted">{{ category.description || 'No description yet.' }}</p>
+            </div>
+            <div class="button-row">
+              <button class="btn btn-secondary" type="button" (click)="editCategory(category)">Edit</button>
+              <button class="btn btn-danger" type="button" (click)="deleteCategory(category)">Delete</button>
+            </div>
+          </article>
+        }
+      </div>
+    } @else if (!loading()) {
+      <app-empty-state
+        title="No categories yet"
+        description="Create the first category to organize quizzes."
+      />
+    }
+  </section>
+</main>

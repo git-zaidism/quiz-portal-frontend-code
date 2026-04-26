@@ -1,0 +1,98 @@
+<main class="layout">
+  <section class="panel form-card">
+    @if (quiz(); as quiz) {
+      <span class="eyebrow">{{ quiz.title }}</span>
+      <h1>Question builder</h1>
+      <p class="text-muted">{{ quiz.categoryTitle }} · {{ quiz.numberOfQuestions }} planned questions</p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="field-grid">
+      <div class="field">
+        <label for="content">Question content</label>
+        <textarea id="content" formControlName="content"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="image">Image URL</label>
+        <input id="image" formControlName="image" />
+      </div>
+
+      <div class="field-grid two">
+        <div class="field">
+          <label for="option1">Option 1</label>
+          <input id="option1" formControlName="option1" />
+        </div>
+        <div class="field">
+          <label for="option2">Option 2</label>
+          <input id="option2" formControlName="option2" />
+        </div>
+      </div>
+
+      <div class="field-grid two">
+        <div class="field">
+          <label for="option3">Option 3</label>
+          <input id="option3" formControlName="option3" />
+        </div>
+        <div class="field">
+          <label for="option4">Option 4</label>
+          <input id="option4" formControlName="option4" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="answer">Correct answer</label>
+        <select id="answer" formControlName="answer">
+          <option value="">Select the correct answer</option>
+          @for (value of [form.controls.option1.value, form.controls.option2.value, form.controls.option3.value, form.controls.option4.value]; track $index) {
+            @if (value) {
+              <option [value]="value">{{ value }}</option>
+            }
+          }
+        </select>
+      </div>
+
+      <div class="button-row">
+        <button class="btn btn-primary" type="submit" [disabled]="saving()">
+          {{ saving() ? 'Saving...' : form.controls.questionId.value ? 'Update question' : 'Add question' }}
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="resetForm()">Reset</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel list-card">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Question list</span>
+        <h2>Current questions</h2>
+      </div>
+      <span class="chip">{{ questions().length }} loaded</span>
+    </div>
+
+    @if (errorMessage()) {
+      <p class="empty-copy">{{ errorMessage() }}</p>
+    }
+
+    @if (questions().length) {
+      <div class="list-stack">
+        @for (question of questions(); track question.questionId) {
+          <article class="question-row">
+            <div>
+              <div class="question-copy" [innerHTML]="question.content"></div>
+              <p class="text-muted">Answer: {{ question.answer }}</p>
+            </div>
+            <div class="button-row">
+              <button class="btn btn-secondary" type="button" (click)="editQuestion(question)">Edit</button>
+              <button class="btn btn-danger" type="button" (click)="deleteQuestion(question)">Delete</button>
+            </div>
+          </article>
+        }
+      </div>
+    } @else if (!loading()) {
+      <app-empty-state
+        title="No questions yet"
+        description="Add the first question to complete this quiz."
+      />
+    }
+  </section>
+</main>

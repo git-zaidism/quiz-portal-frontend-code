@@ -1,51 +1,33 @@
-<mat-card *ngIf="user">
-  <h1>Your Profile Details</h1>
-  <!-- {{ user | json }} -->
-  <mat-card-content>
-    <div class="bootstrap-wrapper">
-      <div class="container">
-        <div class="container text-center">
-          <img
-            src="https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg"
-            alt=""
-            class="profile-image"
-          />
-
-          <h1 class="mt20">{{ user.firstName }} {{ user.lastName }}</h1>
-        </div>
-
-        <div class="row">
-          <div class="col-md-10 offset-md-1">
-            <!-- //table Details  -->
-            <table class="table text-center">
-              <tr>
-                <td>Username</td>
-                <td>{{ user.username }}</td>
-              </tr>
-              <tr>
-                <td>Userid</td>
-                <td>EXAM{{ user.id }}</td>
-              </tr>
-              <tr>
-                <td>Phone</td>
-                <td>{{ user.phone }}</td>
-              </tr>
-              <tr>
-                <td>Role</td>
-                <td>{{ user.authorities[0].authority }}</td>
-              </tr>
-              <tr>
-                <td>Status</td>
-                <td>{{ user.enabled ? "ACTIVE" : "NOTACTIVE" }}</td>
-              </tr>
-            </table>
-          </div>
+@if (authSession.user(); as user) {
+  <main class="profile page-shell">
+    <section class="profile-card panel">
+      <div class="profile-head">
+        <div class="avatar">{{ user.firstName.slice(0, 1) }}</div>
+        <div>
+          <span class="eyebrow">Profile</span>
+          <h1>{{ authSession.displayName() }}</h1>
+          <p class="text-muted">{{ user.username }} · {{ user.email }}</p>
         </div>
       </div>
-    </div>
-  </mat-card-content>
-  <mat-card-actions class="text-center">
-    <button mat-raised-button color="primary">UPDATE</button>
-    <button mat-raised-button color="accent">SHARE</button>
-  </mat-card-actions>
-</mat-card>
+
+      <div class="profile-grid">
+        <article>
+          <h2>Identity</h2>
+          <p><strong>Username:</strong> {{ user.username }}</p>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Phone:</strong> {{ user.phone || 'Not provided' }}</p>
+        </article>
+
+        <article>
+          <h2>Access</h2>
+          <div class="chip-row">
+            @for (authority of user.authorities; track authority.authority) {
+              <span class="chip">{{ authority.authority }}</span>
+            }
+          </div>
+          <p><strong>Status:</strong> {{ user.enabled ? 'Enabled' : 'Disabled' }}</p>
+        </article>
+      </div>
+    </section>
+  </main>
+}

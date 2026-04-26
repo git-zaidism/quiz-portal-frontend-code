@@ -1,0 +1,57 @@
+<main class="panel editor">
+  <span class="eyebrow">{{ quizId > 0 ? 'Edit quiz' : 'Create quiz' }}</span>
+  <h1>{{ quizId > 0 ? 'Refine quiz settings' : 'Build a new quiz' }}</h1>
+  <p class="text-muted">The form now writes the flattened backend payload, including `categoryId`.</p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="field-grid">
+    <div class="field-grid two">
+      <div class="field">
+        <label for="title">Title</label>
+        <input id="title" formControlName="title" />
+      </div>
+      <div class="field">
+        <label for="categoryId">Category</label>
+        <select id="categoryId" formControlName="categoryId">
+          <option [value]="0">Select a category</option>
+          @for (category of categories(); track category.categoryId) {
+            <option [value]="category.categoryId">{{ category.title }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+
+    <div class="field-grid three">
+      <div class="field">
+        <label for="maxMarks">Max marks</label>
+        <input id="maxMarks" formControlName="maxMarks" />
+      </div>
+      <div class="field">
+        <label for="numberOfQuestions">Number of questions</label>
+        <input id="numberOfQuestions" formControlName="numberOfQuestions" />
+      </div>
+      <div class="field toggle-field">
+        <label for="active">Active</label>
+        <select id="active" formControlName="active">
+          <option [ngValue]="true">Active</option>
+          <option [ngValue]="false">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    @if (errorMessage()) {
+      <p class="empty-copy">{{ errorMessage() }}</p>
+    }
+
+    <div class="button-row">
+      <button class="btn btn-primary" type="submit" [disabled]="saving() || loading()">
+        {{ saving() ? 'Saving...' : quizId > 0 ? 'Update quiz' : 'Create quiz' }}
+      </button>
+      <a class="btn btn-secondary" routerLink="/admin/quizzes">Back</a>
+    </div>
+  </form>
+</main>

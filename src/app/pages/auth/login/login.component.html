@@ -1,0 +1,44 @@
+<main class="auth-shell">
+  <section class="auth-card panel">
+    <div class="auth-copy">
+      <span class="eyebrow">Secure entry</span>
+      <h1>{{ title() }}</h1>
+      <p class="text-muted">
+        Sign in against the updated backend contract and route into the correct workspace automatically.
+      </p>
+      <div class="segmented">
+        <button type="button" [class.active]="mode() === 'learner'" (click)="setMode('learner')">
+          Learner
+        </button>
+        <button type="button" [class.active]="mode() === 'admin'" (click)="setMode('admin')">
+          Admin
+        </button>
+      </div>
+    </div>
+
+    <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label for="username">Username</label>
+        <input id="username" formControlName="username" placeholder="Enter your username" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" placeholder="Enter your password" />
+      </div>
+
+      @if (errorMessage()) {
+        <p class="auth-error">{{ errorMessage() }}</p>
+      }
+
+      <button class="btn btn-primary auth-submit" type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Signing in...' : 'Continue' }}
+      </button>
+
+      <p class="auth-link">
+        No account yet?
+        <a routerLink="/signup">Create one</a>
+      </p>
+    </form>
+  </section>
+</main>

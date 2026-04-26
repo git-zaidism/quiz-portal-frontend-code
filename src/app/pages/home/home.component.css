@@ -1,0 +1,150 @@
+.home {
+  padding: 1.25rem 0 4rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.brand img {
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.brand strong {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.brand span {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+.hero-copy h1 {
+  margin: 1rem 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.7rem, 6vw, 5.4rem);
+  line-height: 0.95;
+}
+
+.hero-copy p {
+  max-width: 42rem;
+  font-size: 1.05rem;
+}
+
+.hero-points {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.35rem;
+}
+
+.hero-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.hero-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-soft);
+}
+
+.hero-stat span {
+  color: var(--text-muted);
+}
+
+.hero-stat strong {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.hero-preview {
+  padding: 1.2rem;
+  border-radius: 1.1rem;
+  background:
+    linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(37, 99, 235, 0.16)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.preview-badge {
+  display: inline-flex;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(13, 19, 33, 0.55);
+  color: var(--accent);
+  font-size: 0.78rem;
+  margin-bottom: 0.9rem;
+}
+
+.preview-lines {
+  display: grid;
+  gap: 0.55rem;
+  font-family: monospace;
+  color: var(--text-secondary);
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding-top: 2.5rem;
+}
+
+.feature {
+  padding: 1.4rem;
+}
+
+.feature h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 960px) {
+  .topbar,
+  .nav-links,
+  .hero,
+  .features {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+}

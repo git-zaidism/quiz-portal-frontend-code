@@ -1,0 +1,65 @@
+<main class="dashboard">
+  <section class="panel hero-card">
+    <span class="eyebrow">Admin overview</span>
+    <h1 class="section-title">Run quiz operations without digging through old forms.</h1>
+    <p class="text-muted">
+      This workspace is now aligned with the latest backend DTOs and keeps the catalog actions in one place.
+    </p>
+    <div class="button-row">
+      <a class="btn btn-primary" routerLink="/admin/add-quiz">Create quiz</a>
+      <a class="btn btn-secondary" routerLink="/admin/categories">Manage categories</a>
+    </div>
+  </section>
+
+  @if (errorMessage()) {
+    <section class="panel message-card">
+      <p>{{ errorMessage() }}</p>
+    </section>
+  }
+
+  <section class="stat-grid">
+    <article class="stat-card">
+      <span class="text-muted">Categories</span>
+      <strong>{{ categoryCount() }}</strong>
+    </article>
+    <article class="stat-card">
+      <span class="text-muted">Quizzes</span>
+      <strong>{{ quizCount() }}</strong>
+    </article>
+    <article class="stat-card">
+      <span class="text-muted">Published</span>
+      <strong>{{ activeQuizCount() }}</strong>
+    </article>
+    <article class="stat-card">
+      <span class="text-muted">Draft / inactive</span>
+      <strong>{{ inactiveQuizCount() }}</strong>
+    </article>
+  </section>
+
+  <section class="panel recent-card">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Recent quizzes</span>
+        <h2>Quick launch points</h2>
+      </div>
+      <a routerLink="/admin/quizzes">View all</a>
+    </div>
+
+    <div class="list-stack">
+      @for (quiz of recentQuizzes(); track quiz.quizId) {
+        <article class="quiz-row">
+          <div>
+            <strong>{{ quiz.title }}</strong>
+            <p class="text-muted">{{ quiz.categoryTitle }} · {{ quiz.numberOfQuestions }} questions</p>
+          </div>
+          <div class="button-row">
+            <a class="btn btn-secondary" [routerLink]="['/admin/quiz', quiz.quizId]">Edit</a>
+            <a class="btn btn-secondary" [routerLink]="['/admin/view-questions', quiz.quizId]">Questions</a>
+          </div>
+        </article>
+      } @empty {
+        <p class="empty-copy">No quizzes available yet.</p>
+      }
+    </div>
+  </section>
+</main>

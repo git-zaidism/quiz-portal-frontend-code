@@ -1,0 +1,25 @@
+<main class="workspace page-shell">
+  <aside class="sidebar panel">
+    <div>
+      <span class="eyebrow">Admin</span>
+      <h1>Quiz operations</h1>
+      <p class="text-muted">Manage the assessment catalog and publish clean quiz flows.</p>
+    </div>
+
+    <nav class="workspace-nav">
+      <a routerLink="/admin" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Overview</a>
+      <a routerLink="/admin/categories" routerLinkActive="active">Categories</a>
+      <a routerLink="/admin/quizzes" routerLinkActive="active">Quizzes</a>
+      <a routerLink="/admin/profile" routerLinkActive="active">Profile</a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <p>{{ authSession.displayName() }}</p>
+      <button class="btn btn-secondary" type="button" (click)="authSession.logout()">Logout</button>
+    </div>
+  </aside>
+
+  <section class="workspace-content">
+    <router-outlet />
+  </section>
+</main>

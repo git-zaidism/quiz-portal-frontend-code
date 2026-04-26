@@ -1,0 +1,102 @@
+<main class="attempt page-shell">
+  @if (quiz(); as quiz) {
+    <section class="panel topbar">
+      <div>
+        <span class="eyebrow">Timed attempt</span>
+        <h1>{{ quiz.title }}</h1>
+        <p class="text-muted">{{ quiz.categoryTitle }} · {{ quiz.numberOfQuestions }} questions</p>
+      </div>
+      <div class="attempt-stats">
+        <div>
+          <span>Time left</span>
+          <strong>{{ formattedTime() }}</strong>
+        </div>
+        <div>
+          <span>Answered</span>
+          <strong>{{ attemptedCount() }}/{{ questions().length }}</strong>
+        </div>
+      </div>
+    </section>
+  }
+
+  @if (result(); as result) {
+    <section class="panel result-card">
+      <span class="eyebrow">Result</span>
+      <h2>Quiz complete</h2>
+      <div class="stat-grid">
+        <article class="stat-card">
+          <span class="text-muted">Marks</span>
+          <strong>{{ result.marksGot }}</strong>
+        </article>
+        <article class="stat-card">
+          <span class="text-muted">Correct</span>
+          <strong>{{ result.correctAnswers }}</strong>
+        </article>
+        <article class="stat-card">
+          <span class="text-muted">Attempted</span>
+          <strong>{{ result.attempted }}</strong>
+        </article>
+        <article class="stat-card">
+          <span class="text-muted">Remaining</span>
+          <strong>{{ questions().length - result.attempted }}</strong>
+        </article>
+      </div>
+      <div class="button-row">
+        <a class="btn btn-primary" routerLink="/user-dashboard">Back to quizzes</a>
+      </div>
+    </section>
+  } @else if (currentQuestion(); as question) {
+    <section class="attempt-layout">
+      <aside class="panel navigator">
+        <span class="eyebrow">Question map</span>
+        <div class="nav-grid">
+          @for (item of questions(); track item.questionId; let index = $index) {
+            <button
+              type="button"
+              [class.active]="index === currentIndex()"
+              [class.done]="!!answers()[item.questionId]"
+              (click)="jumpTo(index)"
+            >
+              {{ index + 1 }}
+            </button>
+          }
+        </div>
+      </aside>
+
+      <section class="panel question-card">
+        <div class="question-head">
+          <span class="chip">Question {{ currentIndex() + 1 }} of {{ questions().length }}</span>
+        </div>
+
+        <div class="question-copy" [innerHTML]="question.content"></div>
+
+        <div class="options">
+          @for (option of [question.option1, question.option2, question.option3, question.option4]; track $index) {
+            <button
+              type="button"
+              class="option"
+              [class.selected]="answers()[question.questionId] === option"
+              (click)="pickAnswer(option)"
+            >
+              {{ option }}
+            </button>
+          }
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-secondary" type="button" (click)="previous()">Previous</button>
+          <button class="btn btn-secondary" type="button" (click)="next()">Next</button>
+          <button class="btn btn-primary" type="button" (click)="submit()" [disabled]="submitting()">
+            {{ submitting() ? 'Submitting...' : 'Submit quiz' }}
+          </button>
+        </div>
+      </section>
+    </section>
+  }
+
+  @if (errorMessage()) {
+    <section class="panel result-card">
+      <p>{{ errorMessage() }}</p>
+    </section>
+  }
+</main>

@@ -1,0 +1,74 @@
+<main class="auth-shell">
+  <section class="auth-card panel signup-card">
+    <div class="auth-copy">
+      <span class="eyebrow">New learner</span>
+      <h1>Create your quiz workspace account.</h1>
+      <p class="text-muted">
+        Registration now aligns with the backend request DTO and feeds directly into the refreshed learner flow.
+      </p>
+    </div>
+
+    <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field-grid two">
+        <div class="field">
+          <label for="firstName">First name</label>
+          <input id="firstName" formControlName="firstName" />
+          @if (fieldErrors()['firstName']) {
+            <span class="error">{{ fieldErrors()['firstName'] }}</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="lastName">Last name</label>
+          <input id="lastName" formControlName="lastName" />
+        </div>
+      </div>
+
+      <div class="field-grid two">
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" formControlName="username" />
+          @if (fieldErrors()['username']) {
+            <span class="error">{{ fieldErrors()['username'] }}</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" formControlName="phone" />
+        </div>
+      </div>
+
+      <div class="field-grid two">
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" />
+          @if (fieldErrors()['email']) {
+            <span class="error">{{ fieldErrors()['email'] }}</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" formControlName="password" />
+          @if (fieldErrors()['password']) {
+            <span class="error">{{ fieldErrors()['password'] }}</span>
+          }
+        </div>
+      </div>
+
+      @if (errorMessage()) {
+        <p class="auth-error">{{ errorMessage() }}</p>
+      }
+
+      <button class="btn btn-primary auth-submit" type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Creating account...' : 'Create account' }}
+      </button>
+
+      <p class="auth-link">
+        Already registered?
+        <a routerLink="/login">Go to login</a>
+      </p>
+    </form>
+  </section>
+</main>

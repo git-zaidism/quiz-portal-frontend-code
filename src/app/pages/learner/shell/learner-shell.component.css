@@ -1,0 +1,63 @@
+.workspace {
+  display: grid;
+  grid-template-columns: 19rem 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+}
+
+.sidebar {
+  position: sticky;
+  top: 1.25rem;
+  align-self: start;
+  display: grid;
+  gap: 1.4rem;
+  padding: 1.3rem;
+}
+
+.sidebar h1 {
+  margin: 0.9rem 0 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+}
+
+.workspace-nav {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.workspace-nav a,
+.category-link {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.95rem;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+}
+
+.workspace-nav a.active,
+.category-link.active {
+  background: rgba(125, 211, 252, 0.12);
+  border-color: rgba(125, 211, 252, 0.16);
+  color: var(--text-primary);
+}
+
+.category-stack {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.category-link span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 980px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}

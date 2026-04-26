@@ -1,0 +1,41 @@
+.confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(6, 10, 19, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+.confirm-card {
+  width: min(30rem, 100%);
+  padding: 1.5rem;
+  border-color: var(--border-strong);
+}
+
+.confirm-card h2 {
+  margin: 0.9rem 0 0.55rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.55rem;
+}
+
+.confirm-card p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .confirm-actions {
+    flex-direction: column-reverse;
+  }
+}

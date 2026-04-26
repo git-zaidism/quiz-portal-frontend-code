@@ -1,0 +1,70 @@
+<main class="panel page">
+  <div class="page-head">
+    <div>
+      <span class="eyebrow">Catalog</span>
+      <h1>Manage quizzes</h1>
+      <p class="text-muted">Filter, edit, and move directly into question management.</p>
+    </div>
+    <a class="btn btn-primary" routerLink="/admin/add-quiz">Create quiz</a>
+  </div>
+
+  <div class="field-grid three filters">
+    <div class="field">
+      <label for="search">Search</label>
+      <input id="search" [value]="search()" (input)="updateSearch($event)" />
+    </div>
+    <div class="field">
+      <label for="categoryFilter">Category</label>
+      <select id="categoryFilter" [value]="categoryFilter()" (change)="updateCategoryFilter($event)">
+        <option value="all">All categories</option>
+        @for (category of categories(); track category.categoryId) {
+          <option [value]="category.categoryId">{{ category.title }}</option>
+        }
+      </select>
+    </div>
+    <div class="field">
+      <label for="statusFilter">Status</label>
+      <select id="statusFilter" [value]="statusFilter()" (change)="updateStatusFilter($event)">
+        <option value="all">All</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="empty-copy">{{ errorMessage() }}</p>
+  }
+
+  @if (filteredQuizzes().length) {
+    <div class="list-stack">
+      @for (quiz of filteredQuizzes(); track quiz.quizId) {
+        <article class="quiz-row">
+          <div class="quiz-copy">
+            <div class="quiz-head">
+              <strong>{{ quiz.title }}</strong>
+              <span class="chip">{{ quiz.active ? 'Active' : 'Inactive' }}</span>
+            </div>
+            <p class="text-muted">{{ quiz.description || 'No description added.' }}</p>
+            <div class="meta-row">
+              <span>{{ quiz.categoryTitle }}</span>
+              <span>{{ quiz.numberOfQuestions }} questions</span>
+              <span>{{ quiz.maxMarks }} marks</span>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <a class="btn btn-secondary" [routerLink]="['/admin/quiz', quiz.quizId]">Edit</a>
+            <a class="btn btn-secondary" [routerLink]="['/admin/view-questions', quiz.quizId]">Questions</a>
+            <button class="btn btn-danger" type="button" (click)="deleteQuiz(quiz)">Delete</button>
+          </div>
+        </article>
+      }
+    </div>
+  } @else if (!loading()) {
+    <app-empty-state
+      title="No quizzes match the current filters"
+      description="Create a quiz or loosen the filters to see more results."
+    />
+  }
+</main>

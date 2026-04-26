@@ -1,10 +1,77 @@
-<div class="bootstrap-wrapper">
-  <div class="container">
-    <div class="row mt20">
-      <div class="col-md-6 offset-md-3 text-center">
-        <h1>Welcome to Examportal</h1>
-        <button mat-raised-button color="accent">Home Page</button>
+<main class="home">
+  <section class="page-shell topbar">
+    <a class="brand" routerLink="/">
+      <img src="assets/logo.png" alt="Quiz Portal logo" />
+      <div>
+        <strong>Quiz Portal</strong>
+        <span>Assessment control room</span>
+      </div>
+    </a>
+
+    <nav class="nav-links">
+      <a routerLink="/signup">Create account</a>
+      <a routerLink="/login">Login</a>
+      <a class="btn btn-primary" [routerLink]="primaryRoute()">{{ primaryLabel() }}</a>
+    </nav>
+  </section>
+
+  <section class="page-shell hero">
+    <div class="hero-copy">
+      <span class="eyebrow">2026 redesign</span>
+      <h1>Ship quizzes with a workspace that finally feels production-grade.</h1>
+      <p class="text-muted">
+        The learner journey is cleaner, the admin workspace is faster to operate, and the data layer now
+        matches the updated Spring Boot API contract.
+      </p>
+
+      <div class="button-row">
+        <a class="btn btn-primary" [routerLink]="primaryRoute()">{{ primaryLabel() }}</a>
+        <a class="btn btn-secondary" routerLink="/signup">Create learner account</a>
+      </div>
+
+      <div class="hero-points">
+        <span class="chip">Typed API models</span>
+        <span class="chip">Angular 20 upgrade path</span>
+        <span class="chip">Learner + admin flows</span>
       </div>
     </div>
-  </div>
-</div>
+
+    <div class="hero-card panel">
+      <div class="hero-stat">
+        <span>Operations</span>
+        <strong>Unified</strong>
+      </div>
+      <div class="hero-stat">
+        <span>Quiz runtime</span>
+        <strong>Timed & scored</strong>
+      </div>
+      <div class="hero-stat">
+        <span>Admin experience</span>
+        <strong>List, edit, publish</strong>
+      </div>
+      <div class="hero-preview">
+        <div class="preview-badge">Live contract</div>
+        <div class="preview-lines">
+          <span>POST /generate-token</span>
+          <span>GET /quiz/active</span>
+          <span>POST /question/eval-quiz</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-shell features">
+    <article class="feature panel">
+      <h2>Admin workspace</h2>
+      <p class="text-muted">Manage categories, quizzes, and questions from a tighter dashboard with clearer actions.</p>
+    </article>
+    <article class="feature panel">
+      <h2>Learner flow</h2>
+      <p class="text-muted">Browse active quizzes by category, review instructions, then attempt in a focused timed interface.</p>
+    </article>
+    <article class="feature panel">
+      <h2>Modern stack</h2>
+      <p class="text-muted">Standalone Angular app bootstrap, route guards, typed services, and lighter custom UI instead of legacy dependencies.</p>
+    </article>
+  </section>
+</main>

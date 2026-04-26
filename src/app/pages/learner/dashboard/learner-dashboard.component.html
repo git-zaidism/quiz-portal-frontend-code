@@ -1,0 +1,35 @@
+<main class="page">
+  <section class="panel hero">
+    <span class="eyebrow">Learner board</span>
+    <h1>{{ title() }}</h1>
+    <p class="text-muted">Choose a published quiz, review the rules, and begin the timed attempt.</p>
+  </section>
+
+  @if (errorMessage()) {
+    <section class="panel status-card">
+      <p>{{ errorMessage() }}</p>
+    </section>
+  }
+
+  @if (quizzes().length) {
+    <section class="quiz-grid">
+      @for (quiz of quizzes(); track quiz.quizId) {
+        <article class="panel quiz-card">
+          <span class="chip">{{ quiz.categoryTitle }}</span>
+          <h2>{{ quiz.title }}</h2>
+          <p class="text-muted">{{ quiz.description || 'No description provided.' }}</p>
+          <div class="meta-row">
+            <span>{{ quiz.numberOfQuestions }} questions</span>
+            <span>{{ quiz.maxMarks }} marks</span>
+          </div>
+          <a class="btn btn-primary" [routerLink]="['/user-dashboard/instructions', quiz.quizId]">View instructions</a>
+        </article>
+      }
+    </section>
+  } @else if (!loading()) {
+    <app-empty-state
+      title="No active quizzes found"
+      description="Try another category or ask an admin to publish a quiz."
+    />
+  }
+</main>

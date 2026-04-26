@@ -1,0 +1,35 @@
+<main class="workspace page-shell">
+  <aside class="sidebar panel">
+    <div>
+      <span class="eyebrow">Learner</span>
+      <h1>Explore quizzes</h1>
+      <p class="text-muted">Browse active quiz sets, follow the instructions, and take timed attempts.</p>
+    </div>
+
+    <nav class="workspace-nav">
+      <a routerLink="/user-dashboard" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+        All quizzes
+      </a>
+      <a routerLink="/user-dashboard/profile" routerLinkActive="active">Profile</a>
+    </nav>
+
+    <div class="category-stack">
+      @for (category of categories(); track category.categoryId) {
+        <a
+          [routerLink]="['/user-dashboard', category.categoryId]"
+          routerLinkActive="active"
+          class="category-link"
+        >
+          <strong>{{ category.title }}</strong>
+          <span>{{ category.description || 'General practice set' }}</span>
+        </a>
+      }
+    </div>
+
+    <button class="btn btn-secondary" type="button" (click)="authSession.logout()">Logout</button>
+  </aside>
+
+  <section class="workspace-content">
+    <router-outlet />
+  </section>
+</main>

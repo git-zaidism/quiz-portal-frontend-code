@@ -1,0 +1,31 @@
+.instructions {
+  display: grid;
+  gap: 1rem;
+  padding: 1.4rem;
+}
+
+.instructions h1 {
+  margin: 0.9rem 0 0.35rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.rule {
+  padding: 1rem;
+}
+
+.rule strong {
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 860px) {
+  .rules {
+    grid-template-columns: 1fr;
+  }
+}
